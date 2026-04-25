@@ -4,8 +4,33 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-base: #0c0e16;
+  --bg-surface: #161b26;
+  --bg-surface-hover: #1c2233;
+  --bg-elevated: #212840;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-focus: rgba(255, 255, 255, 0.15);
+  --text-primary: #f0f2f5;
+  --text-secondary: #7c8494;
+  --text-muted: #4a5063;
+  --income: #34d399;
+  --income-bg: rgba(52, 211, 153, 0.1);
+  --expense: #fb7185;
+  --expense-bg: rgba(251, 113, 133, 0.1);
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --font-heading: 'Sora', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  font-family: var(--font-body);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
