@@ -13,6 +13,12 @@ function TransactionList({ transactions, onDeleteTransaction }) {
     filteredTransactions = filteredTransactions.filter(t => t.category === filterCategory);
   }
 
+  function handleDeleteClick(id) {
+    if (window.confirm("Are you sure you want to delete this transaction?")) {
+      onDeleteTransaction(id);
+    }
+  }
+
   return (
     <div className="transactions">
       <h2>Transactions</h2>
@@ -37,20 +43,20 @@ function TransactionList({ transactions, onDeleteTransaction }) {
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
-            <th></th>
+            <th aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
-          {filteredTransactions.map(t => (
-            <tr key={t.id}>
-              <td>{t.date}</td>
-              <td>{t.description}</td>
-              <td><span className="category-badge">{t.category}</span></td>
-              <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
-                {t.type === "income" ? "+" : "-"}${t.amount}
+          {filteredTransactions.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.date}</td>
+              <td>{transaction.description}</td>
+              <td><span className="category-badge">{transaction.category}</span></td>
+              <td className={transaction.type === "income" ? "income-amount" : "expense-amount"}>
+                {transaction.type === "income" ? "+" : "-"}${transaction.amount}
               </td>
               <td>
-                <button className="delete-btn" onClick={() => { if (window.confirm("Are you sure you want to delete this transaction?")) onDeleteTransaction(t.id); }}>
+                <button className="delete-btn" onClick={() => handleDeleteClick(transaction.id)}>
                   Delete
                 </button>
               </td>

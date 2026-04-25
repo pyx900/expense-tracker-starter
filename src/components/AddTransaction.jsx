@@ -1,30 +1,31 @@
 import { useState } from 'react';
 import { categories } from '../constants';
 
+const DEFAULT_TYPE = "expense";
+const DEFAULT_CATEGORY = "food";
+
 function AddTransaction({ onAddTransaction }) {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
-  const [type, setType] = useState("expense");
-  const [category, setCategory] = useState("food");
+  const [type, setType] = useState(DEFAULT_TYPE);
+  const [category, setCategory] = useState(DEFAULT_CATEGORY);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
+    if (!description || !amount || parseFloat(amount) <= 0) return;
 
-    const newTransaction = {
-      id: Date.now(),
+    onAddTransaction({
       description,
       amount: parseFloat(amount),
       type,
       category,
       date: new Date().toISOString().split('T')[0],
-    };
+    });
 
-    onAddTransaction(newTransaction);
     setDescription("");
     setAmount("");
-    setType("expense");
-    setCategory("food");
+    setType(DEFAULT_TYPE);
+    setCategory(DEFAULT_CATEGORY);
   };
 
   return (
@@ -42,6 +43,8 @@ function AddTransaction({ onAddTransaction }) {
           placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          min="0.01"
+          step="0.01"
         />
         <select value={type} onChange={(e) => setType(e.target.value)}>
           <option value="income">Income</option>

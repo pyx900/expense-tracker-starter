@@ -18,15 +18,23 @@ function App() {
     { id: 8, description: "Netflix", amount: 15, type: "expense", category: "entertainment", date: "2025-01-10" },
   ]);
 
+  function handleAddTransaction(transaction) {
+    setTransactions(prev => [...prev, { ...transaction, id: crypto.randomUUID() }]);
+  }
+
+  function handleDeleteTransaction(id) {
+    setTransactions(prev => prev.filter(t => t.id !== id));
+  }
+
   return (
     <div className="app">
       <Header />
       <Summary transactions={transactions} />
       <CategoryChart transactions={transactions} />
-      <AddTransaction onAddTransaction={(t) => setTransactions(prev => [...prev, t])} />
+      <AddTransaction onAddTransaction={handleAddTransaction} />
       <TransactionList
         transactions={transactions}
-        onDeleteTransaction={(id) => setTransactions(prev => prev.filter(t => t.id !== id))}
+        onDeleteTransaction={handleDeleteTransaction}
       />
     </div>
   );
