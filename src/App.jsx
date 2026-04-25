@@ -3,6 +3,7 @@ import './App.css'
 import Header from './components/Header'
 import Summary from './components/Summary'
 import AddTransaction from './components/AddTransaction'
+import CategoryChart from './components/CategoryChart'
 import TransactionList from './components/TransactionList'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <div className="app">
       <Header />
       <Summary transactions={transactions} />
+      <CategoryChart transactions={transactions} />
       <AddTransaction onAddTransaction={(t) => setTransactions(prev => [...prev, t])} />
       <TransactionList
         transactions={transactions}
