@@ -22,7 +22,10 @@ function App() {
       <Header />
       <Summary transactions={transactions} />
       <AddTransaction onAddTransaction={(t) => setTransactions(prev => [...prev, t])} />
-      <TransactionList transactions={transactions} />
+      <TransactionList
+        transactions={transactions}
+        onDeleteTransaction={(id) => setTransactions(prev => prev.filter(t => t.id !== id))}
+      />
     </div>
   );
 }

@@ -44,4 +44,4 @@ No custom hooks, context providers, or routing.
 - Transaction `amount` is stored as a string, causing the summary totals to concatenate instead of sum (the main bug)
 - "Freelance Work" sample transaction is marked as `"expense"` with category `"salary"` — should be `"income"`
 - No input validation beyond empty-field checks
-- No delete/edit functionality for transactions
+- No edit functionality for transactions
