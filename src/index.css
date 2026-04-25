@@ -5,32 +5,43 @@
 }
 
 :root {
-  --bg-base: #0c0e16;
-  --bg-surface: #161b26;
-  --bg-surface-hover: #1c2233;
-  --bg-elevated: #212840;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-focus: rgba(255, 255, 255, 0.15);
-  --text-primary: #f0f2f5;
-  --text-secondary: #7c8494;
-  --text-muted: #4a5063;
-  --income: #34d399;
-  --income-bg: rgba(52, 211, 153, 0.1);
-  --expense: #fb7185;
-  --expense-bg: rgba(251, 113, 133, 0.1);
-  --accent: #f59e0b;
-  --accent-hover: #d97706;
-  --font-heading: 'Sora', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --bg-base: #eef0f5;
+  --bg-wash: #e4e7ef;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-hover: rgba(255, 255, 255, 0.72);
+  --text-primary: #1a1d2e;
+  --text-secondary: #6b7186;
+  --text-muted: #9ca0b0;
+  --income: #3cc9a1;
+  --income-soft: rgba(60, 201, 161, 0.12);
+  --income-shadow: rgba(60, 201, 161, 0.25);
+  --expense: #e8657a;
+  --expense-soft: rgba(232, 101, 122, 0.12);
+  --expense-shadow: rgba(232, 101, 122, 0.25);
+  --accent: #6b8afd;
+  --accent-hover: #5674e8;
+  --accent-soft: rgba(107, 138, 253, 0.12);
+  --accent-shadow: rgba(107, 138, 253, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+  --radius: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-base);
+  background: var(--bg-base);
   color: var(--text-primary);
   line-height: 1.6;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(107, 138, 253, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 70%, rgba(60, 201, 161, 0.06), transparent);
 }
