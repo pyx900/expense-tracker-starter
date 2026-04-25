@@ -24,7 +24,18 @@ Single-page React 19 app built with Vite. No routing, no backend, no persistence
 
 **Entry path:** `index.html` → `src/main.jsx` → `src/App.jsx`
 
-The entire application is a single monolithic `App.jsx` component containing all state, logic, form handling, filtering, and rendering. There are no child components, custom hooks, context providers, or shared utilities.
+`App.jsx` owns the `transactions` state and composes four child components:
+
+| Component | File | Responsibility |
+|---|---|---|
+| `Header` | `src/components/Header.jsx` | Static title and subtitle |
+| `Summary` | `src/components/Summary.jsx` | Computes and displays income, expenses, and balance from `transactions` prop |
+| `AddTransaction` | `src/components/AddTransaction.jsx` | Form with local state; calls `onAddTransaction` callback to add entries |
+| `TransactionList` | `src/components/TransactionList.jsx` | Filter controls and transaction table; owns filter state locally |
+
+Shared constants (e.g. `categories` array) live in `src/constants.js`.
+
+No custom hooks, context providers, or routing.
 
 **Styling:** Plain CSS in two files (`index.css` for globals, `App.css` for component styles). No CSS framework.
 
@@ -32,6 +43,5 @@ The entire application is a single monolithic `App.jsx` component containing all
 
 - Transaction `amount` is stored as a string, causing the summary totals to concatenate instead of sum (the main bug)
 - "Freelance Work" sample transaction is marked as `"expense"` with category `"salary"` — should be `"income"`
-- All logic lives in one component with no separation of concerns
 - No input validation beyond empty-field checks
 - No delete/edit functionality for transactions

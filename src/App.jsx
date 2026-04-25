@@ -17,20 +17,10 @@ function App() {
     { id: 8, description: "Netflix", amount: 15, type: "expense", category: "entertainment", date: "2025-01-10" },
   ]);
 
-  const totalIncome = transactions
-    .filter(t => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const totalExpenses = transactions
-    .filter(t => t.type === "expense")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const balance = totalIncome - totalExpenses;
-
   return (
     <div className="app">
       <Header />
-      <Summary totalIncome={totalIncome} totalExpenses={totalExpenses} balance={balance} />
+      <Summary transactions={transactions} />
       <AddTransaction onAddTransaction={(t) => setTransactions(prev => [...prev, t])} />
       <TransactionList transactions={transactions} />
     </div>
