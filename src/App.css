@@ -1,148 +1,454 @@
+/* ── Layout ── */
+
 .app {
-  max-width: 800px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 52px 28px 96px;
 }
 
+/* ── Header ── */
+
 h1 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: var(--text-primary);
   margin-bottom: 4px;
+  animation: softReveal 0.6s ease both;
 }
 
 .subtitle {
-  margin-bottom: 20px;
-  color: #666;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+  animation: softReveal 0.6s ease 0.06s both;
 }
 
+/* ── Summary Cards ── */
+
 .summary {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
 }
 
 .summary-card {
-  flex: 1;
-  border: 1px solid #ddd;
-  padding: 14px;
-  background: #fff;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: floatUp 0.55s ease both;
+}
+
+.summary-card:nth-child(1) {
+  animation-delay: 0.1s;
+  box-shadow: var(--shadow-md), 0 8px 30px var(--income-shadow);
+}
+.summary-card:nth-child(2) {
+  animation-delay: 0.17s;
+  box-shadow: var(--shadow-md), 0 8px 30px var(--expense-shadow);
+}
+.summary-card:nth-child(3) {
+  animation-delay: 0.24s;
+  box-shadow: var(--shadow-md), 0 8px 30px var(--accent-shadow);
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+}
+
+.summary-card:nth-child(1):hover {
+  box-shadow: var(--shadow-lg), 0 12px 40px var(--income-shadow);
+}
+.summary-card:nth-child(2):hover {
+  box-shadow: var(--shadow-lg), 0 12px 40px var(--expense-shadow);
+}
+.summary-card:nth-child(3):hover {
+  box-shadow: var(--shadow-lg), 0 12px 40px var(--accent-shadow);
 }
 
 .summary-card h3 {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 4px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
 }
 
 .income-amount {
-  color: green;
-  font-size: 20px;
-  font-weight: bold;
+  color: var(--income);
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
 }
 
 .expense-amount {
-  color: red;
-  font-size: 20px;
-  font-weight: bold;
+  color: var(--expense);
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
 }
 
 .balance-amount {
-  font-size: 20px;
-  font-weight: bold;
+  color: var(--accent);
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
 }
 
+/* ── Category Chart ── */
+
+.category-chart {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-md);
+  animation: floatUp 0.55s ease 0.28s both;
+}
+
+.category-chart h2 {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.chart-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: floatUp 0.4s ease both;
+}
+
+.chart-label {
+  width: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+  flex-shrink: 0;
+}
+
+.chart-track {
+  flex: 1;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  border-radius: 8px;
+  min-width: 4px;
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: barGrow 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.chart-value {
+  width: 70px;
+  text-align: right;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+@keyframes barGrow {
+  from {
+    width: 0 !important;
+  }
+}
+
+/* ── Add Transaction ── */
+
 .add-transaction {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-md);
+  animation: floatUp 0.55s ease 0.3s both;
 }
 
 .add-transaction h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  margin-bottom: 18px;
 }
 
 form {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
+  align-items: stretch;
 }
 
 form input,
 form select {
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 11px 16px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid var(--bg-wash);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
   font-size: 14px;
+  font-weight: 400;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+form input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+form input:focus,
+form select:focus {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 form input[type="text"] {
   flex: 2;
+  min-width: 160px;
 }
 
 form input[type="number"] {
   flex: 1;
+  min-width: 100px;
 }
 
 form select {
   flex: 1;
+  min-width: 120px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca0b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 34px;
 }
 
 form button {
-  padding: 8px 20px;
-  background: #333;
+  padding: 11px 32px;
+  background: var(--accent);
   color: #fff;
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  font-family: var(--font-heading);
   font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 14px var(--accent-shadow);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
+form button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--accent-shadow);
+}
+
+form button:active {
+  transform: translateY(0);
+}
+
+/* ── Transaction List ── */
+
 .transactions {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  animation: floatUp 0.55s ease 0.38s both;
 }
 
 .transactions h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
 }
 
 .filters {
   display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .filters select {
-  padding: 6px;
-  border: 1px solid #ccc;
+  padding: 8px 14px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
   font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca0b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
 }
+
+.filters select:hover {
+  background: var(--glass-hover);
+}
+
+.filters select:focus {
+  border-color: var(--accent);
+}
+
+/* ── Table ── */
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
 }
 
 thead {
-  background: #f5f5f5;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 th {
-  font-size: 12px;
-  color: #888;
+  padding: 14px 18px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
   text-transform: uppercase;
+  letter-spacing: 1.2px;
 }
 
-.delete-btn {
-  padding: 4px 10px;
-  background: #eee;
-  border: 1px solid #ccc;
-  cursor: pointer;
+td {
+  padding: 15px 18px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+  transition: background 0.2s ease;
+}
+
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+tbody tr:hover {
+  background: rgba(107, 138, 253, 0.06);
+}
+
+td .income-amount,
+td .expense-amount {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
   font-size: 12px;
-  color: #333;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ── Delete Button ── */
+
+.delete-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1.5px solid var(--bg-wash);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: var(--expense-soft);
+  border-color: var(--expense);
+  color: var(--expense);
+  box-shadow: 0 2px 10px var(--expense-shadow);
+}
+
+/* ── Animations ── */
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
